@@ -1,31 +1,46 @@
 "use strict";
 
-function validate() {
-  let a = document.getElementById("a");
-  let b = document.getElementById("b");
-  let c = document.getElementById("c");
-
-  if(a,b,c == "" || a,b,c == NaN) {
-    return false;
-  }
-  return true
-}
-
 function solveEquation(a, b, c) {
+  if (isNaN(a)) {
+    return `Параметр "a" содержит неправильное значение "${a}"`;
+  }; 
+  
+  if (isNaN(b)) {
+    return `Параметр "b" содержит неправильное значение "${b}"`;
+  }; 
+  
+  if (isNaN(c)) {
+    return `Параметр "c" содержит неправильное значение "${c}"`;
+  };
+
   let arr = [];
   let d = b**2-4*a*c;
+  let x1, x2
   
  if (d == 0) {
-    arr  = -b/(2*a);
+    x1  = -b/(2*a);
+    return arr.push(x1)
   } else if (d > 0) {
-    arr = (-b + Math.sqrt(d) )/(2*a) && (-b - Math.sqrt(d) )/(2*a);
+    x1 = (-b + Math.sqrt(d))/(2*a);
+    x2 = (-b - Math.sqrt(d))/(2*a);
+    return arr.push(x1,x2)
   }
-  return arr; // array
 }
 
-"use strict";
-
 function calculateTotalMortgage(percent, contribution, amount, date) {
+
+  if (isNaN(percent)) {
+    return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
+  };
+
+  if (isNaN(contribution)) {
+    return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
+  };
+
+  if (isNaN(amount)) {
+    return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
+  };
+
   let totalAmount;
 
   let s = amount - contribution; 
@@ -40,4 +55,5 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   return +totalAmount;
 }
+
 
