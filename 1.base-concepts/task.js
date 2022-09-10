@@ -1,17 +1,6 @@
 "use strict";
 
 function solveEquation(a, b, c) {
-  if (isNaN(a)) {
-    return `Параметр "a" содержит неправильное значение "${a}"`;
-  }; 
-  
-  if (isNaN(b)) {
-    return `Параметр "b" содержит неправильное значение "${b}"`;
-  }; 
-  
-  if (isNaN(c)) {
-    return `Параметр "c" содержит неправильное значение "${c}"`;
-  };
 
   let arr = [];
   let d = b**2-4*a*c;
@@ -19,12 +8,13 @@ function solveEquation(a, b, c) {
   
  if (d == 0) {
     x1  = -b/(2*a);
-    return arr.push(x1)
+    arr.push(x1);
   } else if (d > 0) {
     x1 = (-b + Math.sqrt(d))/(2*a);
     x2 = (-b - Math.sqrt(d))/(2*a);
-    return arr.push(x1,x2)
+    arr.push(x1, x2)
   }
+  return arr;
 }
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
