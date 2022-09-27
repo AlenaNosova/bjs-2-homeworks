@@ -29,11 +29,13 @@ function worker(arr) {
 }
 
 function makeWork(arrOfArr, func) {
-  let max = arrOfArr[0];
-  func(arr);
+  let max = func(arrOfArr[0]);
 
   for(let i = 0; i < arrOfArr.length; i++) {
-    if(arrOfArr[i] > arr[i]) max = sum;
+    const funcResult = func(arrOfArr[i])
+    if(funcResult > max){
+      max = funcResult;
+    }
   }
   
   return max;
@@ -41,11 +43,16 @@ function makeWork(arrOfArr, func) {
 
 // Задание 3
 function worker2(arr) {
-
-  let numb;
+  let max = arr[0];
+  let min = arr[0];
   
-  for(let = i; i < arr.length; i++) {
-    numb = max - min;
-    Math.abs(numb);
+  for(let i = 0; i < arr.length; i++) {
+    if(max < arr[i]) {
+      max = arr[i];
+    }
+    if(min > arr[i]) {
+      min = arr[i];
+    }
   }
+  return Math.abs(max - min);
 }
