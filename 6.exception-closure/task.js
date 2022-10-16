@@ -16,18 +16,24 @@ function validateCount(num) {
 
 class Triangle {
     constructor (a, b, c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+
         if(a > b + c || b > a + c || c > a + b) {
             throw new Error("Треугольник с такими сторонами не существует")
         }
     }
 
-    getPerimeter(a, b, c) {
-        return a + b + c;
+    getPerimeter() {
+        return this.a + this.b + this.c;
     }
 
-    getArea(a, b, c) {
-        const p = (a + b + c)/2;
-        return (p * (p - a) * (p - b) * (p - c) ^ 2).toFixed(3);
+    getArea() {
+        const p = Triangle.getPerimeter/2;
+        const s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3);
+
+        return +s;
     }
 }
 
