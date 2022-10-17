@@ -30,7 +30,7 @@ class Triangle {
     }
 
     getArea() {
-        const p = Triangle.getPerimeter/2;
+        const p = this.getPerimeter()/2;
         const s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3);
 
         return +s;
