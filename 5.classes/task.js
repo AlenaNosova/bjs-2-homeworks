@@ -12,10 +12,14 @@ class PrintEditionItem {
     }
 
     set state (num) {
-            if(num > 0) this._state = 0;
-            if(num < 100) this._state = 100; 
-            
-            this._state = num;
+            if(num < 0) {
+                this._state = 0;
+            }
+            else if(num > 100) {
+                this._state = 100;
+            } else {
+                this._state = num;
+            }
     }
 
     get state () {
@@ -70,54 +74,67 @@ class Library {
     }
 
     findBookBy(type, value) {
-        this.books.find((type, value) => book[type] === value);
-    }
+         for (let i = 0; i < this.books.length; i++) {
+            if (this.books[i][type] === value) {
+                return this.books[i];
+            }
+         }
+            return null;
+        }
 
     giveBookByName(bookName) {
-        const index = this.books.findIndex(book => book.bookName === bookName);
+        let requestedBook = this.findBookBy('name', bookName);
+        let index = this.books.indexOf(requestedBook);
+        if (index === -1) {return null;}
         return this.books.splice(index, 1)[0];
-    }
-}
-
-class Student {
-    constructor (name, gender, age, subjectName) {
-        this.name = name;
-        this. gender = gender;
-        this. age = age;
-        this.subjectName = subjectName;
+        }
     }
 
-    addMark(mark, subjectName) {
-        if (mark >= 1 && mark <= 5 && subjectName === undefined) {
-            this.subjectName = [];
+    class Student {
+        constructor (name, gender, age) {
+            this.name = name;
+            this.gender = gender;
+            this.age = age;
+      }
+    
+      addMark(mark, subjectName) {
+        if (mark < 1){
+            return "Оценка должна быть от 1 до 5"
+        } else if (mark > 5) {
+            return "Оценка должна быть от 1 до 5"
         } else {
-            this.subjectName.push(mark);
+            if (this.marks === undefined) {
+                this.marks = [mark, subjectName];
+                } else {
+                this.marks.push(mark, subjectName);
+                }
+            }
         }
-    }
-
-    getAverageBySubject(subjectName, marks) {
-        let sum = 0;
-        for(let i = 0; i < this.marks.length; i++) {
-          sum += this.marks[i];
+    
+      
+      getAverageBySubject(subjectName) {
+          let sum = 0;
+          let marksNumber = 0;
+          for(let i = 1; i < this.marks.length; i =i+2) {
+            if (subjectName == this.marks[i]) {
+                sum = sum + this.marks[i-1];
+                marksNumber++
+            } else {
+                marksNumber=marksNumber;
+            }
+          }
+          if (sum == 0) {
+              return "Несуществующий предмет"
+          } else {
+              return sum/marksNumber;
+          }
         }
-
-        return sum / this.marks.length;
-    }
-
-    getAverage(...marks) {
-        let sum = 0;
-        for(let i = 0; i < this.marks.length; i++) {
-            sum += this.marks[i];
-    }
-  
-    return sum / this.marks.length;
-  }
-
-  exclude(reason) {
-    if (mark < 1 && mark > 5){
-        delete this.subjectName;
-        delete this.marks;
-        this.excluded = reason;
-    }
-  }
-}
+       
+        getAverage () {
+            let sum = 0;
+            for(let i = 1; i < this.marks.length; i = i+2) {
+              sum = sum + this.marks[i-1];
+              }
+            return sum / (this.marks.length/2);  
+            }
+        }
